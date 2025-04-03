@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Header = ({ toggleModal, nbOfContacts }) => {
   return (
     <header className='header'>
@@ -9,6 +11,11 @@ const Header = ({ toggleModal, nbOfContacts }) => {
       </div>
     </header>
   )
+}
+
+Header.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+  nbOfContacts: PropTypes.number.isRequired,
 }
 
 export default Header

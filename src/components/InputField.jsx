@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const InputField = ({
   label,
   value = '',
@@ -17,5 +19,14 @@ const InputField = ({
     />
   </div>
 )
+
+InputField.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  required: PropTypes.bool.isRequired,
+}
 
 export default InputField

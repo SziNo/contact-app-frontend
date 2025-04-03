@@ -582,11 +582,11 @@ input[type='file']::file-selector-button:hover {
   background-color: var(--selective-blue-3);
 }
 
-.form_footer {
+.form__footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 35px;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 5px;
 }
 
 .form_footer .btn {

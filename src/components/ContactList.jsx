@@ -1,4 +1,5 @@
 import Contact from './Contact'
+import PropTypes from 'prop-types'
 
 const ContactList = ({ data, currentPage, getAllContacts }) => {
   return (
@@ -44,6 +45,26 @@ const ContactList = ({ data, currentPage, getAllContacts }) => {
       )}
     </main>
   )
+}
+
+ContactList.propTypes = {
+  data: PropTypes.shape({
+    content: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,
+        photoUrl: PropTypes.string,
+      })
+    ),
+    totalPages: PropTypes.number,
+  }).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  getAllContacts: PropTypes.func.isRequired,
 }
 
 export default ContactList

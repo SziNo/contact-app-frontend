@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { getContacts, saveContact, updatePhoto } from '../api/contactService'
 import { toastError } from '../utils/toastService'
 
 export default function useContacts() {
   const [data, setData] = useState({})
   const [currentPage, setCurrentPage] = useState(0)
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  const getAllContacts = async (page = 0, size = 10) => {
+  const getAllContacts = useCallback(async (page = 0, size = 10) => {
     try {
       const { data } = await getContacts(page, size)
       setData(data)
@@ -14,7 +17,7 @@ export default function useContacts() {
     } catch (error) {
       toastError(error.message)
     }
-  }
+  }, [])
 
   const saveNewContact = async (contact, file) => {
     try {
@@ -29,7 +32,7 @@ export default function useContacts() {
       }
       return savedContact
     } catch (error) {
-      throw error // Let the component handle toast
+      throw error
     }
   }
 
@@ -62,11 +65,20 @@ export default function useContacts() {
   }
 
   useEffect(() => {
+    if (location.state?.forceRefresh) {
+      getAllContacts(currentPage)
+      // If there's forceRefresh in location,we then clear the state to prevent unnecessary refreshes
+      navigate(location.pathname, { replace: true, state: {} })
+    }
+  }, [location, currentPage, navigate, getAllContacts])
+
+  useEffect(() => {
     getAllContacts()
-  }, [])
+  }, [getAllContacts])
 
   return {
     data,
+    setData,
     currentPage,
     getAllContacts,
     saveNewContact,

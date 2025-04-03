@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
-import { getContact } from '../api/contactService'
+import { useNavigate } from 'react-router-dom'
+import useContacts from './useContacts'
+import { deleteContact, getContact } from '../api/contactService'
 import { toastError, toastSuccess } from '../utils/toastService'
+import PropTypes from 'prop-types'
 
 export default function useContactDetail(id, { updateImage, updateContact }) {
+  const navigate = useNavigate()
+  const { setData } = useContacts()
+
   const [contact, setContact] = useState({
     id: '',
     name: '',
@@ -48,15 +54,41 @@ export default function useContactDetail(id, { updateImage, updateContact }) {
     }
   }
 
+  const onDeleteContact = async (id) => {
+    try {
+      await deleteContact(id)
+      toastSuccess('Contact Deleted')
+
+      setData((prevData) => ({
+        ...prevData,
+        content: prevData.content.filter((contact) => contact.id !== id),
+      }))
+
+      navigate('/', { state: { forceRefresh: true } })
+    } catch (error) {
+      toastError(error.message)
+    }
+  }
+
   useEffect(() => {
-    fetchContact()
+    if (id) {
+      fetchContact()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   return {
     contact,
     setContact,
+    fetchContact,
     handlePhotoUpdate,
     onUpdateContact,
-    fetchContact,
+    onDeleteContact,
   }
+}
+
+useContactDetail.propTypes = {
+  id: PropTypes.string.isRequired,
+  updateImage: PropTypes.func.isRequired,
+  updateContact: PropTypes.func.isRequired,
 }

@@ -61,7 +61,10 @@ const App = () => {
 
   return (
     <>
-      <Header toggleModal={toggleModal} nbOfContacts={data.totalElements} />
+      <Header
+        toggleModal={toggleModal}
+        nbOfContacts={data.totalElements || 0}
+      />
       <main className='main'>
         <div className='container'>
           <Routes>

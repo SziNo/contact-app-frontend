@@ -1,14 +1,19 @@
 import React, { useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import InputField from './InputField'
 import useContactDetail from '../hooks/useContactDetail'
+import InputField from './InputField'
+import PropTypes from 'prop-types'
 
 const ContactDetail = ({ updateContact, updateImage }) => {
   const { id } = useParams()
   const inputRef = useRef()
-  const { contact, setContact, handlePhotoUpdate, onUpdateContact } =
-    useContactDetail(id, { updateImage, updateContact })
+  const {
+    contact,
+    setContact,
+    handlePhotoUpdate,
+    onUpdateContact,
+    onDeleteContact,
+  } = useContactDetail(id, { updateImage, updateContact })
 
   const selectImage = () => inputRef.current.click()
 
@@ -129,6 +134,15 @@ const ContactDetail = ({ updateContact, updateImage }) => {
                 aria-label='Save contact changes'
               >
                 Save Changes
+              </button>
+
+              <button
+                type='button'
+                onClick={() => onDeleteContact(id)}
+                className='btn btn-danger'
+                aria-label='Delete contact from list'
+              >
+                Delete Contact
               </button>
             </div>
           </form>

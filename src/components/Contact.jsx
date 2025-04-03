@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { truncate } from '../utils/truncate'
+import PropTypes from 'prop-types'
 
 const Contact = ({ contact }) => {
   return (
@@ -36,6 +37,19 @@ const Contact = ({ contact }) => {
       </Link>
     </li>
   )
+}
+
+Contact.propTypes = {
+  contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    photoUrl: PropTypes.string,
+  }).isRequired,
 }
 
 export default Contact

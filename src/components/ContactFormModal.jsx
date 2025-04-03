@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import InputField from './InputField'
+import PropTypes from 'prop-types'
 
 const ContactFormModal = ({
   modalRef,
@@ -55,13 +55,21 @@ const ContactFormModal = ({
               name='address'
               required
             />
-            <InputField
-              label='Account Status'
-              value={values.status}
-              onChange={onChange}
-              name='status'
-              required
-            />
+            <div className='input-box'>
+              <span className='details'>Account Status</span>
+              <select
+                value={values.status}
+                onChange={onChange}
+                name='status'
+                className='form__select'
+                required
+              >
+                <option value=''>Select Status</option>
+                <option value='Active'>Active</option>
+                <option value='Inactive'>Inactive</option>
+                <option value='Pending'>Pending</option>
+              </select>
+            </div>
             <div className='file-input'>
               <span className='details'>Profile Photo</span>
               <input
@@ -73,7 +81,7 @@ const ContactFormModal = ({
               />
             </div>
           </div>
-          <div className='form_footer'>
+          <div className='form__footer'>
             <button
               onClick={() => toggleModal(false)}
               type='button'
