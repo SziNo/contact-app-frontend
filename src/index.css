@@ -11,6 +11,11 @@
   --spooky-black-1: hsl(0, 0%, 9%);
   --spooky-black-2: hsl(180, 3%, 7%);
   --spooky-black-3: hsla(0, 0%, 0%, 0.06);
+  --gradient-color: linear-gradient(
+    90deg,
+    hsl(40, 90%, 97%),
+    hsl(40, 80%, 90%)
+  );
 
   --border-color: #e7eaee;
   --border-color2: hsl(214, 17%, 92%);
@@ -128,7 +133,7 @@
 
 body {
   font-family: var(--ff-poppins);
-  background-color: var(--white);
+  background: var(--gradient-color);
   line-height: var(--lh-1);
   -webkit-font-smoothing: antialiased;
 }

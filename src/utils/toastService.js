@@ -1,14 +1,15 @@
 import { toast } from 'react-toastify'
 
 const toastConfig = {
-  position: toast.POSITION.TOP_RIGHT,
-  autoClose: 1500,
-  hideProgressBar: false,
+  position: 'top-right',
+  autoClose: 3000,
+  hideProgressBar: true,
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  theme: 'light',
+  theme: 'colored',
+  className: 'custom-toast',
 }
 
 export function toastInfo(message) {

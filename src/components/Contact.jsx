@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { truncate } from '../utils/truncate'
 
 const Contact = ({ contact }) => {
   return (
@@ -9,13 +10,13 @@ const Contact = ({ contact }) => {
             <img src={contact.photoUrl} alt={contact.name} />
           </div>
           <div className='contact__details'>
-            <p className='contact_name'>{contact.name.substring(0, 15)} </p>
+            <p className='contact_name'>{truncate(contact.name, 15)}</p>
             <p className='contact_title'>{contact.title}</p>
           </div>
         </div>
         <div className='contact__body'>
           <p>
-            <i className='bi bi-envelope'></i> {contact.email.substring(0, 20)}{' '}
+            <i className='bi bi-envelope'></i> {truncate(contact.email, 20)}
           </p>
           <p>
             <i className='bi bi-geo'></i> {contact.address}
